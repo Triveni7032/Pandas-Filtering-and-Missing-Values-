@@ -1,0 +1,127 @@
+# Pandas Filtering and Missing Values
+
+Filtering is used to select specific data from a DataFrame based on conditions.
+
+Missing values are empty or unavailable values in a dataset.
+
+```python
+import pandas as pd
+1. Sample DataFrame
+data = {
+    "Name": ["Triveni", "Anu", "Ravi", "Priya"],
+    "Age": [22, 23, None, 25],
+    "Salary": [35000, 40000, 45000, None]
+}
+
+df = pd.DataFrame(data)
+2. Filtering Data
+
+Filter employees with salary greater than 35000:
+
+df[df["Salary"] > 35000]
+3. Filtering with Multiple Conditions
+
+Using & means AND:
+
+df[(df["Age"] > 22) & (df["Salary"] > 35000)]
+
+Using | means OR:
+
+df[(df["Age"] > 22) | (df["Salary"] > 35000)]
+4. Filtering with loc
+df.loc[df["Salary"] > 35000]
+
+Select specific columns:
+
+df.loc[df["Salary"] > 35000, ["Name", "Salary"]]
+5. Using isin()
+
+isin() checks whether values belong to a list.
+
+df[df["Name"].isin(["Triveni", "Ravi"])]
+Missing Values
+6. Detect Missing Values
+
+isnull() identifies missing values.
+
+df.isnull()
+
+Count missing values:
+
+df.isnull().sum()
+7. notnull()
+
+notnull() identifies values that are not missing.
+
+df[df["Salary"].notnull()]
+8. dropna()
+
+dropna() removes rows containing missing values.
+
+df.dropna()
+
+Remove rows only when a specific column is missing:
+
+df.dropna(subset=["Salary"])
+9. fillna()
+
+fillna() replaces missing values.
+
+Replace with zero:
+
+df.fillna(0)
+
+Replace missing salary with the average salary:
+
+df["Salary"] = df["Salary"].fillna(df["Salary"].mean())
+10. Checking Missing Values by Column
+df.isnull().sum()
+
+Example output:
+
+Name      0
+Age       1
+Salary    1
+11. Filtering After Handling Missing Values
+df["Salary"] = df["Salary"].fillna(df["Salary"].mean())
+
+df[df["Salary"] > 35000]
+12. Quick Summary
+Filtering
+↓
+Select data based on conditions
+
+& 
+↓
+AND condition
+
+|
+↓
+OR condition
+
+isin()
+↓
+Check multiple values
+
+isnull()
+↓
+Find missing values
+
+notnull()
+↓
+Find available values
+
+dropna()
+↓
+Remove missing values
+
+fillna()
+↓
+Replace missing values
+Conclusion
+
+Pandas filtering helps select the required data, while missing-value functions help clean and prepare datasets for analysis.
+
+These concepts are important for data cleaning and data analysis using Pandas.
+
+ Part of my Python and Pandas learning journey.
